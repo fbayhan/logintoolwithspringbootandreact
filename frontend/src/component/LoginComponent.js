@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Form, Button, Container, Row, Col, Alert} from 'react-bootstrap';
+import {Link} from "react-router-dom";
 
 function LoginComponent() {
 
@@ -64,22 +65,15 @@ function LoginComponent() {
                                 {errors.password}
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Row>
-                            <Col>
+                        <Row  className="justify-content-md-center">
+                            <Col xs lg="2">
                                 <Button variant="primary" type="submit" className="login-button">
-                                    Login
+                                    Sign In
                                 </Button>
                             </Col>
-                            <Col>
-                                <Button variant="primary" className="login-button">
-                                    New User
-                                </Button>
-                            </Col>
-                            <Col>
-                                <Button variant="primary" className="login-button">
-                                    Forget Password
-                                </Button>
-                            </Col>
+                            <Col xs lg="2"><Link to="/signup">Sign Up</Link></Col>
+                            <Col xs lg="2"><Link to="/renewpassword">Renew Password</Link></Col>
+
                         </Row>
                     </Form>
                 </div>

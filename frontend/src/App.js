@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import NormalUser from "./pages/NormalUser";
 import EveryOneSees from "./pages/EveryOneSees";
 import ExclusiveUser from "./pages/ExclusiveUser";
+import SignUp from "./pages/SignUp";
+import RenewPassword from "./pages/RenewPassword";
 
 
 
@@ -24,6 +26,8 @@ function App() {
                 <Route path="/normaluser" element={<NormalUser/>}/>
                 <Route path="/everyonesees" element={<EveryOneSees/>}/>
                 <Route path="/exclusiveuser" element={<ExclusiveUser/>}/>
+                <Route path="/signup" element={<SignUp/>}/>
+                <Route path="/renewpassword" element={<RenewPassword/>}/>
             </Routes>
         </>
     );

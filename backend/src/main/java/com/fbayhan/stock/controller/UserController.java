@@ -1,15 +1,28 @@
 package com.fbayhan.stock.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import com.fbayhan.stock.dto.requestdto.ChangePasswordRequest;
+import com.fbayhan.stock.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/user")
-public class UserController {
+import java.security.Principal;
 
-    @GetMapping("/test")
-    public String getTest() {
-        return "Argon Project 4";
+@RestController
+@RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
+public class UserController {
+    private final UserService service;
+
+    @PatchMapping
+    public ResponseEntity<?> changePassword(
+            @RequestBody ChangePasswordRequest request,
+            Principal connectedUser
+    ) {
+        service.changePassword(request, connectedUser);
+        return ResponseEntity.ok().build();
     }
 }

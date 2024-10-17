@@ -1,13 +1,15 @@
 import React, {useState} from 'react';
 import {Form, Button, Container, Row, Col, Alert} from 'react-bootstrap';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import axios from "axios";
+import {jwtDecode} from "jwt-decode";
 
 function LoginComponent() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState({});
-
+    const navigation = useNavigate();
     const validateForm = () => {
         const newErrors = {};
         if (!email) newErrors.email = 'Email is required';
@@ -18,7 +20,7 @@ function LoginComponent() {
     };
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const formErrors = validateForm();
         if (Object.keys(formErrors).length > 0) {
@@ -26,7 +28,29 @@ function LoginComponent() {
         } else {
             setErrors({});
             console.log('Login attempted with:', {email, password});
-            // Here you would typically send a request to your server
+
+
+            const payload = {
+                "email": email,
+                "password": password,
+            };
+
+
+            try {
+                const token = await axios.post("http://localhost:8090/api/v1/auth/authenticate", payload);
+                console.log(token)
+                localStorage.setItem("token", token.data.access_token);
+                localStorage.setItem("refreshToken", token.data.refresh_token);
+                console.log(token.data.access_token)
+                console.log("Fatih")
+                const decoded = jwtDecode(token.data.access_token);
+                console.log(decoded)
+
+                console.log(token);
+                navigation("/normaluser");
+            } catch (error) {
+                return error;
+            }
         }
     };
 
@@ -65,7 +89,7 @@ function LoginComponent() {
                                 {errors.password}
                             </Form.Control.Feedback>
                         </Form.Group>
-                        <Row  className="justify-content-md-center">
+                        <Row className="justify-content-md-center">
                             <Col xs lg="2">
                                 <Button variant="primary" type="submit" className="login-button">
                                     Sign In

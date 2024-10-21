@@ -24,4 +24,12 @@ public class Category {
 
     @OneToMany(mappedBy = "category")
     private List<Item> items;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "upperCategory")
+    private Category upperCategory;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Category> subCategories;
+
 }

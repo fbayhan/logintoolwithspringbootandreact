@@ -23,8 +23,8 @@ public class CategoryService {
 
     public CategoryResponse category(CategoryRequest request) {
         Category category = Category.builder().categoryName(request.getCategoryName()).build();
-        if(request.getUppperCategoryId()!=null){
-            Category upperCategory=categoryRepository.findById(request.getUppperCategoryId()).orElse(null);
+        if (request.getUppperCategoryId() != null) {
+            Category upperCategory = categoryRepository.findById(request.getUppperCategoryId()).orElse(null);
             category.setUpperCategory(upperCategory);
         }
         categoryRepository.save(category);
@@ -37,7 +37,7 @@ public class CategoryService {
 
     public List<CategoryResponse> categories() {
         List<Category> categories = categoryRepository.findAll();
-        List<CategoryResponse> categoryResponses=categoryMapper.categoryListToCategoryResponse(categories);
+        List<CategoryResponse> categoryResponses = categoryMapper.categoryListToCategoryResponse(categories);
         return categoryResponses;
     }
 
@@ -45,5 +45,12 @@ public class CategoryService {
         Category category = categoryRepository.findById(id).orElse(null);
         CategoryResponse categoryResponse = categoryMapper.categoryToCategoryResponse(category);
         return categoryResponse;
+    }
+
+    public List<CategoryResponse> searchCategory(String searchparametre) {
+        List<Category> categories = categoryRepository.findCategoryByCategoryNameLike("%" + searchparametre + "%");
+        List<CategoryResponse> categoryResponses = categoryMapper.categoryListToCategoryResponse(categories);
+        return categoryResponses;
+
     }
 }

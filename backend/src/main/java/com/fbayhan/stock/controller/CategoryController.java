@@ -4,6 +4,7 @@ import com.fbayhan.stock.dto.requestdto.CategoryRequest;
 import com.fbayhan.stock.dto.responsedto.CategoryResponse;
 import com.fbayhan.stock.mapper.CategoryMapper;
 import com.fbayhan.stock.mapper.CategoryMapperImpl;
+import com.fbayhan.stock.model.Category;
 import com.fbayhan.stock.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -36,5 +37,11 @@ public class CategoryController {
     public ResponseEntity<List<CategoryResponse>> getAllCategories(){
         List<CategoryResponse> categoryResponses=categoryService.categories();
         return ResponseEntity.ok(categoryResponses);
+    }
+
+    @GetMapping("/searchcategory/{searchparametre}")
+    public List<CategoryResponse> searchCategory(@PathVariable String searchparametre){
+        List<CategoryResponse> categories=categoryService.searchCategory(searchparametre);
+        return categories;
     }
 }

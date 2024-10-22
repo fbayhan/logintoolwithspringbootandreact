@@ -11,7 +11,11 @@ import EveryOneSees from "./pages/EveryOneSees";
 import ExclusiveUser from "./pages/ExclusiveUser";
 import SignUp from "./pages/SignUp";
 import RenewPassword from "./pages/RenewPassword";
-
+import AuthenticatedUser from "./pages/AuthenticatedUser";
+import Category from "./pages/Category";
+import Item from "./pages/Item";
+import TODO from "./pages/TODO";
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -28,6 +32,12 @@ function App() {
                 <Route path="/exclusiveuser" element={<ExclusiveUser/>}/>
                 <Route path="/signup" element={<SignUp/>}/>
                 <Route path="/renewpassword" element={<RenewPassword/>}/>
+                <Route path="/auth" element={<AuthenticatedUser/>}>
+                    <Route path="category" element={< Category/>}/>
+                    <Route path="item" element={< Item/>}/>
+                    <Route path="todo" element={< TODO/>}/>
+                    <Route path="dashboard" element={< Dashboard/>}/>
+                </Route>
             </Routes>
         </>
     );

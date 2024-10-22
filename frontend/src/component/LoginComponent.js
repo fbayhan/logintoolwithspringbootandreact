@@ -38,15 +38,12 @@ function LoginComponent() {
 
             try {
                 const token = await axios.post("http://localhost:8090/api/v1/auth/authenticate", payload);
-                console.log(token)
+
                 localStorage.setItem("token", token.data.access_token);
                 localStorage.setItem("refreshToken", token.data.refresh_token);
-                console.log(token.data.access_token)
-                console.log("Fatih")
-                const decoded = jwtDecode(token.data.access_token);
-                console.log(decoded)
 
-                console.log(token);
+                const decoded = jwtDecode(token.data.access_token);
+
                 navigation("/normaluser");
             } catch (error) {
                 return error;

@@ -1,6 +1,7 @@
 package com.fbayhan.stock.mapper;
 
 import com.fbayhan.stock.dto.responsedto.CategoryResponse;
+import com.fbayhan.stock.dto.responsedto.CategorySearchResponse;
 import com.fbayhan.stock.model.Category;
 import com.fbayhan.stock.repository.CategoryRepository;
 import org.mapstruct.Mapper;
@@ -47,6 +48,25 @@ public class CategoryMapperImpl implements CategoryMapper {
         List<CategoryResponse> categoryResponses = new ArrayList<>();
         for (Category category : categories) {
             CategoryResponse categoryResponse = categoryToCategoryResponse(category);
+            categoryResponses.add(categoryResponse);
+        }
+
+        return categoryResponses;
+    }
+
+    @Override
+    public List<CategorySearchResponse> categoryListToCategorySearchResponse(List<Category> categories) {
+        List<CategorySearchResponse> categoryResponses = new ArrayList<>();
+        for (Category category : categories) {
+            CategorySearchResponse categoryResponse = new CategorySearchResponse();
+            categoryResponse.setCategoryId(category.getId());
+            if (category.getUpperCategory() != null) {
+                categoryResponse.setCategoryName(category.getCategoryName() + " >>> " + category.getUpperCategory().getCategoryName());
+                categoryResponse.setUpperCategoryId(category.getUpperCategory().getId());
+            } else {
+                categoryResponse.setCategoryName(category.getCategoryName());
+            }
+
             categoryResponses.add(categoryResponse);
         }
 

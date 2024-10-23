@@ -2,6 +2,7 @@ package com.fbayhan.stock.service;
 
 import com.fbayhan.stock.dto.requestdto.CategoryRequest;
 import com.fbayhan.stock.dto.responsedto.CategoryResponse;
+import com.fbayhan.stock.dto.responsedto.CategorySearchResponse;
 import com.fbayhan.stock.mapper.CategoryMapperImpl;
 import com.fbayhan.stock.model.Category;
 import com.fbayhan.stock.repository.CategoryRepository;
@@ -28,7 +29,7 @@ public class CategoryService {
             category.setUpperCategory(upperCategory);
         }
         categoryRepository.save(category);
-        CategoryResponse categoryResponse = CategoryResponse.builder().categoryId(category.getId()).categoryName(category.getCategoryName()).build();
+        CategoryResponse categoryResponse = CategoryResponse.builder().categoryId(category.getId()).categoryName(category.getCategoryName()).upperCategoryId(request.getUppperCategoryId()).build();
         return categoryResponse;
 
 
@@ -47,9 +48,10 @@ public class CategoryService {
         return categoryResponse;
     }
 
-    public List<CategoryResponse> searchCategory(String searchparametre) {
+    public List<CategorySearchResponse> searchCategory(String searchparametre) {
         List<Category> categories = categoryRepository.findCategoryByCategoryNameLike("%" + searchparametre + "%");
-        List<CategoryResponse> categoryResponses = categoryMapper.categoryListToCategoryResponse(categories);
+        List<CategorySearchResponse> categoryResponses = categoryMapper.categoryListToCategorySearchResponse(categories);
+
         return categoryResponses;
 
     }

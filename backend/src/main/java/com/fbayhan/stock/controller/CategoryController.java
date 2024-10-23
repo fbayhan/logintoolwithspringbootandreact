@@ -2,6 +2,7 @@ package com.fbayhan.stock.controller;
 
 import com.fbayhan.stock.dto.requestdto.CategoryRequest;
 import com.fbayhan.stock.dto.responsedto.CategoryResponse;
+import com.fbayhan.stock.dto.responsedto.CategorySearchResponse;
 import com.fbayhan.stock.mapper.CategoryMapper;
 import com.fbayhan.stock.mapper.CategoryMapperImpl;
 import com.fbayhan.stock.model.Category;
@@ -40,8 +41,8 @@ public class CategoryController {
     }
 
     @GetMapping("/searchcategory/{searchparametre}")
-    public List<CategoryResponse> searchCategory(@PathVariable String searchparametre){
-        List<CategoryResponse> categories=categoryService.searchCategory(searchparametre);
+    public List<CategorySearchResponse> searchCategory(@PathVariable String searchparametre){
+        List<CategorySearchResponse> categories=categoryService.searchCategory(searchparametre);
         return categories;
     }
 }

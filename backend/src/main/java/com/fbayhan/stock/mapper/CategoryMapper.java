@@ -1,6 +1,7 @@
 package com.fbayhan.stock.mapper;
 
 import com.fbayhan.stock.dto.responsedto.CategoryResponse;
+import com.fbayhan.stock.dto.responsedto.CategorySearchResponse;
 import com.fbayhan.stock.model.Category;
 import org.mapstruct.Mapper;
 
@@ -11,5 +12,5 @@ public interface CategoryMapper {
     Category categoryResponseToCategory(CategoryResponse categoryResponse);
     CategoryResponse categoryToCategoryResponse(Category category);
     List<CategoryResponse> categoryListToCategoryResponse(List<Category> categories);
-
+    List<CategorySearchResponse> categoryListToCategorySearchResponse(List<Category> categories);
 }

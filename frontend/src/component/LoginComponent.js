@@ -44,7 +44,7 @@ function LoginComponent() {
 
                 const decoded = jwtDecode(token.data.access_token);
 
-                navigation("/normaluser");
+                navigation("/auth/category");
             } catch (error) {
                 return error;
             }
